@@ -384,7 +384,8 @@ function card_element_footer(params, card_data, options) {
     color +
     ';"><p class="card-footer-text">' +
     footer_text +
-    "</p></div>"
+    "</p></div>" +
+    '<div style="height: 5mm"></div>'
   );
 }
 
@@ -999,8 +1000,81 @@ function card_generate_contents(card_data, options) {
     });
   });
 
-  result += `<div class="card-content-container">${html}</div>`;
+  if (card_data.show_spell_info) {
+    let spellHtml = '';
+    spellHtml += '<table class="card-spell card-font-size-8">';
+    spellHtml += '  <tbody><tr>';
+    spellHtml += '      <td class="card-spell-property">';
+    spellHtml += '          <p class="card-spell-property-name">Casting:</p>'
+    spellHtml += '          <p class="card-spell-property-data">' + spell_generate_cast_time(card_data) + '</p>'
+    spellHtml += '      </td>';
+    spellHtml += '      <td class="card-spell-property">';
+    spellHtml += '          <p class="card-spell-property-name">Range:</p>'
+    spellHtml += '        <p class="card-spell-property-data">' + spell_generate_range_string(card_data) + '</p>';
+    spellHtml += '      </td>';
+    spellHtml += '  </tr><tr>';
+    spellHtml += '      <td class="card-spell-property">';
+    spellHtml += '          <p class="card-spell-property-name">Components:</p>'
+    spellHtml += '          <p class="card-spell-property-data">' + spell_generate_component_string(card_data) + '</p>'
+    spellHtml += '      </td>';
+    spellHtml += '      <td class="card-spell-property">';
+    spellHtml += '          <p class="card-spell-property-name">Duration:</p>'
+    spellHtml += '          <p class="card-spell-property-data">' + spell_generate_duration(card_data) + '</p>'
+    spellHtml += '      </td>';
+    spellHtml += '  </tr></tbody>';
+    spellHtml += '</table>';
+
+    result += `<div class="test">${spellHtml}</div>`;
+  }
+
+  result += `<div class="card-content-container">`;
+  if (card_data.material) {
+    result += spell_generate_material_cost(card_data, options);
+  }
+  result += `${html}</div>`;
   return result;
+}
+
+function spell_generate_cast_time(card_data) {
+    let cast_time = '';
+    cast_time += (card_data.cast_time != null && card_data.cast_time.trim().length > 0) ? card_data.cast_time : '--';
+    if (card_data.ritual) {
+        cast_time += '<i class="spell-icon game-icon game-icon-fire-bowl card-spell-property-data"></i>';
+    }
+    return cast_time;
+}
+
+function spell_generate_component_string(card_data) {
+    let components = '';
+    components += card_data.verbal ? 'V' : '';
+    components += card_data.somatic ? ' S' : '';
+    components += card_data.material ? ' M' : '';
+    components = components.trim().replaceAll(' ', ', ');
+    return components.length > 0 ? components : 'N/A';
+}
+
+function spell_generate_range_string(card_data) {
+    let range = '';
+    range += (card_data.range != null && card_data.range.trim().length > 0) ? card_data.range : '--';
+    range += (card_data.area != null && card_data.area.trim().length > 0) ? '; ' + card_data.area : '';
+    return range;
+}
+
+function spell_generate_duration(card_data) {
+    let duration = '';
+    duration += (card_data.duration != null && card_data.duration.trim().length > 0) ? card_data.duration : '--';
+    if (card_data.concentration) {
+        duration += '<i class="spell-icon game-icon game-icon-brain card-spell-property-data"></i>';
+    }
+    return duration;
+}
+
+function spell_generate_material_cost(card_data, options) {
+    let cost = '';
+    if (card_data.material_cost != null && card_data.material_cost.trim().length > 0) {
+        cost += card_element_description(['Material Cost:', card_data.material_cost], card_data, options)
+    }
+    return cost;
 }
 
 function card_repeat(card, count) {
@@ -1034,7 +1108,7 @@ function card_generate_crop_marks(card_data, options, params = {}) {
 }
 
 function card_generate_color_front_style(color, data = {}, options = {}) {
-  return `style="color:${color};border-color:${color};background-color:${color}"`;
+  return `style="color:${color};border-color:${color};"`;
 }
 
 function card_generate_color_back_style(color, data = {}, options = {}) {
@@ -1099,12 +1173,14 @@ function card_generate_front(data, options, { isPreview }) {
   var card_width = "calc(" + width + " + " + back_bleed_width + ")";
   var card_height = "calc(" + height + " + " + back_bleed_height + ")";
 
-  var card_style = isPreview ? add_size_to_style(style_color, width, height) : add_size_to_style(style_color, card_width, card_height);
+//   var card_style = isPreview ? add_size_to_style(style_color, width, height) : add_size_to_style(style_color, card_width, card_height);
+  var card_style = add_size_to_style(style_color, card_width, card_height);
 
-  var card_content_style = isPreview ? '' : add_bleed_to_style();
+//   var card_content_style = isPreview ? '' : add_bleed_to_style();
+  var card_content_style = add_bleed_to_style(card_style);
   const cornersClass = options.rounded_corners  ? "rounded-corners" : "";
-  return `<div class="card ${cornersClass}" ${card_style}>
-    <div class="card-content" ${card_content_style}>
+  return `<div class="card" ${card_content_style}>
+    <div class="card-content ${cornersClass}" style="background-color:${color}">
       <div class="card-header">
         ${card_element_title(data, options)}
         ${card_element_type(data, options)}
@@ -1172,7 +1248,8 @@ function card_generate_back(data, options, { isPreview }) {
   var card_width = "calc(" + width + " + " + back_bleed_width + ")";
   var card_height = "calc(" + height + " + " + back_bleed_height + ")";
 
-  var card_style = isPreview ? add_size_to_style(style_color, width, height) : add_size_to_style(style_color, card_width, card_height);
+//   var card_style = isPreview ? add_size_to_style(style_color, width, height) : add_size_to_style(style_color, card_width, card_height);
+  var card_style = add_size_to_style(style_color, card_width, card_height);
 
   const $tmpCard = $(card_generate_back_html({ card_style }));
   const $tmpCardContainer = $('<div style="position:absolute;visibility:hidden;pointer-events:none;"></div>');

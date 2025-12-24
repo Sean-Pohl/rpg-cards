@@ -350,6 +350,17 @@ function ui_update_selected_card() {
         $("#card-icon-back-rotation").val(card.icon_back_rotation);
 		$("#card-background").val(card.background_image);
         $("#card-contents").val(card.contents?.join("\n"));
+        document.getElementById("show-spell-info").checked = card.show_spell_info;
+        document.getElementById("verbal").checked = card.verbal;
+        document.getElementById("somatic").checked = card.somatic;
+        document.getElementById("material").checked = card.material;
+        document.getElementById("concentration").checked = card.concentration;
+        document.getElementById("ritual").checked = card.ritual;
+        $("#range").val(card.range);
+        $("#area").val(card.area);
+        $("#cast-time").val(card.cast_time);
+        $("#duration").val(card.duration);
+        $("#material-cost").val(card.material_cost);
         $("#card-tags").val(card.tags.join(", "));
         getFieldGroup('card').forEach(field => {
             field.changeValue(field.getData(), { updateData: false });
@@ -366,6 +377,17 @@ function ui_update_selected_card() {
 		$("#card-background").val("");
         $("#card-contents").val("");
         $("#card-tags").val("");
+        $("#range").val("");
+        $("#area").val("");
+        $("#cast-time").val("1 Action");
+        $("#duration").val("");
+        $("#material-cost").val("");
+        document.getElementById("show-spell-info").checked = true;
+        document.getElementById("verbal").checked = false;
+        document.getElementById("somatic").checked = false;
+        document.getElementById("material").checked = false;
+        document.getElementById("concentration").checked = false;
+        document.getElementById("ritual").checked = false;
         getFieldGroup('card').forEach(field => field.reset());
     }
 
@@ -981,6 +1003,17 @@ function ui_zoom_keep_ratio(event) {
     local_store_save();
 }
 
+function update_flag() {
+    var property = $(this).attr("data-option");
+    var value = $(this).is(':checked');
+    var card = ui_selected_card();
+    if (card) {
+        card[property] = value;
+        console.log(card)
+        ui_render_selected_card();
+    }
+}
+
 $(document).ready(function () {
     parse_card_actions().then(function () {
         local_store_load();
@@ -1081,6 +1114,18 @@ $(document).ready(function () {
           return this;
         }
     });
+
+    $('#show-spell-info').change(update_flag);
+    $('#verbal').change(update_flag);
+    $('#somatic').change(update_flag);
+    $('#material').change(update_flag);
+    $('#concentration').change(update_flag);
+    $('#ritual').change(update_flag);
+    $('#range').change(ui_change_card_property);
+    $('#area').change(ui_change_card_property);
+    $('#cast-time').change(ui_change_card_property);
+    $('#duration').change(ui_change_card_property);
+    $('#material-cost').change(ui_change_card_property);
 
     $("#button-generate").click(ui_generate);
     $("#button-load").click(function () {

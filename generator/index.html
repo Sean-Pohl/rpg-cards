@@ -577,6 +577,7 @@
                                                 <option value="9">9px</option>
                                                 <option value="smaller">8.88px (smaller)</option>
                                                 <option value="8">8px</option>
+                                                <option value="7">7px</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
@@ -775,6 +776,7 @@
                                 <option value="9">9px</option>
                                 <option value="smaller">8.88px (smaller)</option>
                                 <option value="8">8px</option>
+                                <option value="7">7px</option>
                             </select>
                         </div>
                     </div>
@@ -856,6 +858,69 @@
                         <div class="col-sm-10">
                             <input type="text" id="card-background" class="form-control"
                                 placeholder="Background image URL" data-property="background_image">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <legend class="col-sm-2 control-label">Spell Details</legend>
+                        <div class="col-sm-10">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" checked id="show-spell-info" data-option="show_spell_info" class="toggle">
+                                        Show Spell Details
+                                        <div class="toggleable">
+                                            <div class="form-group">
+                                                <label for="cast-time" class="col-sm-2 control-label">Cast Time</label>
+                                                <div class="col-sm-7">
+                                                    <select class="form-control" id="cast-time" data-property="cast_time">
+                                                        <option value="1 Action">Action</option>
+                                                        <option value="1 Bonus Action">Bonus Action</option>
+                                                        <option value="1 Reaction">Reaction</option>
+                                                        <option value="1 Minute">1 Minute</option>
+                                                        <option value="10 Minutes">10 Minutes</option>
+                                                        <option value="1 Hour">1 Hour</option>
+                                                        <option value="8 Hours">8 Hours</option>
+                                                        <option value="12 Hours">12 Hours</option>
+                                                        <option value="24 Hours">24 Hours</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <input type="checkbox" id="ritual" data-option="ritual"> Ritual
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Range/Area</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" id="range" class="form-control" placeholder="Range" data-property="range">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" id="area" class="form-control" placeholder="Area" data-property="area">
+                                                </div> 
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Components</label>
+                                                <div class="col-sm-10">
+                                                        <label class="pr-1"><input type="checkbox" id="verbal" data-option="verbal">Verbal</label>
+                                                        <label class="px-1"><input type="checkbox" id="somatic" data-option="somatic">Somatic</label>
+                                                        <label class="pl-1">
+                                                            <input type="checkbox" id="material" class="toggle" data-option="material">Material
+                                                            <input type="text" id="material-cost" class="toggleable form-control" placeholder="Material Cost" data-property="material_cost">
+                                                        </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="duration" class="col-sm-2 control-label">Duration</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" id="duration" class="form-control" placeholder="Duration" data-property="duration">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <input type="checkbox" id="concentration" data-option="concentration"> Concentration
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">

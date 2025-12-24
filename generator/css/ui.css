@@ -20,6 +20,14 @@ html, body {
   word-wrap: break-word;
 }
 
+.toggleable {
+  display: none;
+}
+
+.toggle:checked + .toggleable {
+  display: block;
+}
+
 .preview-container {
   display: flex;
   flex-wrap: wrap;

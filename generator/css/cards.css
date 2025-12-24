@@ -2,6 +2,44 @@
     position: relative;
 }
 
+/* .card-spell {
+    border-spacing: 0px;
+	width: 100%;
+    margin-top:0px;
+    background-color: white;
+    border-color: inherit;
+} */
+
+.card-spell-property {
+    padding: 1mm;
+    padding-top: 0.5mm;
+    padding-bottom: 0.5mm;
+	width: 50%;
+	border-style: solid;
+	border-width: thin;
+}
+
+.card-spell-property-name {
+    vertical-align: top;
+    float: left;
+    padding: 0;
+	font-weight: bold;
+    margin: 0;
+}
+
+.card-spell-property-data {
+    vertical-align: top;
+    float: right;
+    padding: 0;
+    margin: 0;
+}
+
+.spell-icon {
+    font-size: 10px;
+    line-height: 1 !important;
+    margin-left: 2px;
+}
+
 .hide {
     display: none;
 }
@@ -10,6 +48,7 @@
     box-sizing: border-box;
     height: 100%;
     border: 2mm solid;
+    border-top: 1mm solid;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -18,7 +57,7 @@
     flex-shrink: 0;
 }
 
-.card.rounded-corners {
+.card-content.rounded-corners {
     border-radius: 4px;
 }
 
@@ -26,10 +65,23 @@
     border-radius: inherit;
 }
 
+.test {
+    position: relative; /* Added to allow the HTML card content to be absolutely centered */
+    border-radius: 2mm;
+    margin-top:0px;
+    background-color: white;
+    border-color: inherit;
+    display: flex;
+    flex-direction: column;
+    font-size: inherit;
+    overflow: hidden;
+    border-bottom: 1mm solid;
+}
+
 .card-content-container {
     position: relative; /* Added to allow the HTML card content to be absolutely centered */
-    padding:2mm;
-    padding-top:1mm;
+    padding:1mm;
+    padding-top: 0mm;
     border-radius: 2mm;
     margin-top:0px;
     background-color: white;
@@ -153,8 +205,7 @@
 }
 
 .card-title {
-    height: 8mm;
-    padding-left: 2mm;
+    padding-left: 1mm;
     font-family: Lora, 'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif;
     font-variant: small-caps;
     font-weight: bold;
@@ -165,30 +216,37 @@
 .card-title-16 {
     font-size: 16pt;
     line-height: 6.5mm;
+    height: 6.5mm;
 }
 .card-title-15 {
     font-size: 15pt;
-    line-height: 6.5mm;
+    line-height: 6.3mm;
+    height: 6.3mm;
 }
 .card-title-14 {
     font-size: 14pt;
-    line-height: 6.5mm;
+    line-height: 5.9mm;
+    height: 5.9mm;
 }
 .card-title-13 {
     font-size: 13pt;
-    line-height: 7mm;
+    line-height: 5.6mm;
+    height: 5.6mm;
 }
 .card-title-12 {
     font-size: 12pt;
-    line-height: 7mm;
+    line-height: 5.2mm;
+    height: 5.2mm;
 }
 .card-title-11 {
     font-size: 11pt;
-    line-height: 7.5mm;
+    line-height: 4.9mm;
+    height: 4.9mm;
 }
 .card-title-10 {
     font-size: 10pt;
-    line-height: 7.5mm;
+    line-height: 4.5mm;
+    height: 4.5mm;
 }
 .card-font-size-12 {
     font-size: 12px;
@@ -212,6 +270,10 @@
 }
 .card-font-size-smaller {
     font-size: smaller;
+    line-height: 1.3;
+}
+.card-font-size-7 {
+    font-size: 7px;
     line-height: 1.3;
 }
 .card-subtitle {
