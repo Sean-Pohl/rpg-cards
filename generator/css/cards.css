@@ -84,13 +84,19 @@
     padding-top: 0mm;
     border-radius: 2mm;
     margin-top:0px;
-    background-color: white;
     border-color: inherit;
     display: flex;
     flex-direction: column;
     flex: 1;
     font-size: inherit;
     overflow: hidden;
+    border: none;
+    background: linear-gradient(
+        to bottom,
+        white 0%,
+        white calc(100% - 2mm),
+        transparent calc(100% - 2mm)
+    );
 }
 
 .card-back {
@@ -250,31 +256,71 @@
 }
 .card-font-size-12 {
     font-size: 12px;
-    line-height: 1.3;
+    line-height: 1;
+}
+.card-font-size-11_5 {
+    font-size: 11.5px;
+    line-height: 1;
 }
 .card-font-size-11 {
     font-size: 11px;
-    line-height: 1.3;
+    line-height: 1;
+}
+.card-font-size-10_5 {
+    font-size: 10.5px;
+    line-height: 1;
 }
 .card-font-size-10 {
     font-size: 10px;
-    line-height: 1.3;
+    line-height: 1;
+}
+.card-font-size-9_5 {
+    font-size: 9.5px;
+    line-height: 1;
 }
 .card-font-size-9 {
     font-size: 9px;
-    line-height: 1.3;
+    line-height: 1;
+}
+.card-font-size-8_5 {
+    font-size: 8.5px;
+    line-height: 1;
 }
 .card-font-size-8 {
     font-size: 8px;
-    line-height: 1.3;
+    line-height: 1;
 }
-.card-font-size-smaller {
-    font-size: smaller;
-    line-height: 1.3;
+.card-font-size-7_5 {
+    font-size: 7.5px;
+    line-height: 1;
 }
 .card-font-size-7 {
     font-size: 7px;
-    line-height: 1.3;
+    line-height: 1;
+}
+.card-font-size-6_5 {
+    font-size: 6.5px;
+    line-height: 1;
+}
+.card-font-size-6 {
+    font-size: 6px;
+    line-height: 1;
+}
+.card-font-size-5_5 {
+    font-size: 5.5px;
+    line-height: 1;
+}
+.card-font-size-5 {
+    font-size: 5px;
+    line-height: 1;
+}
+.card-font-size-4_5 {
+    font-size: 4.5px;
+    line-height: 1;
+}
+.card-font-size-4 {
+    font-size: 4px;
+    line-height: 1;
 }
 .card-subtitle {
     margin-bottom: 0.0em;

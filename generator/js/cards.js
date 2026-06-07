@@ -384,8 +384,7 @@ function card_element_footer(params, card_data, options) {
     color +
     ';"><p class="card-footer-text">' +
     footer_text +
-    "</p></div>" +
-    '<div style="height: 5mm"></div>'
+    "</p></div>"
   );
 }
 
@@ -1026,6 +1025,10 @@ function card_generate_contents(card_data, options) {
 
     result += `<div class="test">${spellHtml}</div>`;
   }
+
+  let footerSize = html.includes('card-footer') ? 5 : 2.5;
+
+  html += `<div style="height: ` + footerSize + `mm"></div>`
 
   result += `<div class="card-content-container">`;
   if (card_data.material) {
